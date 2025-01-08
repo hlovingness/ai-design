@@ -3,7 +3,7 @@ import {IKeybindingService, KeybindingService} from '@/views/Editor/core/keybind
 import {Disposable} from '@/views/Editor/utils/lifecycle'
 import {EventbusService, IEventbusService} from "@/views/Editor/core/eventbus/eventbusService";
 import {keybindMap} from "@/views/Editor/utils/constants";
-import {flipHorizontally, flipVertically, getParentLayer} from "@/views/Editor/utils/utils";
+import {getParentLayer} from "@/views/Editor/utils/utils";
 import {IUI} from "@leafer-ui/interface";
 import { IEditorUndoRedoService, EditorUndoRedoService } from '@/views/Editor/app/editor/undoRedo/undoRedoService'
 import { IHierarchyService, HierarchyService } from '@/views/Editor/core/layer/hierarchyService'
@@ -182,7 +182,7 @@ export class Layer extends Disposable {
             const activeObject = canvas.getActiveObject()
             const parent = getParentLayer(activeObject)
             // const parent = activeObject?.parent || canvas.app.tree
-            canvas.setActiveObjects(parent.children?.reverse())
+            canvas.setActiveObjects(parent.children)
             return false
         })
 

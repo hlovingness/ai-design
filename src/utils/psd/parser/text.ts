@@ -37,14 +37,14 @@ function parseStyledText(layer: LayerInfo, options = {}) {
         ...options
     });
 
-    let textStr = layer.text.text.replace(/([^\S\n]*)\n/g, '\n');
+    let textStr = layer.text.text.replace(/([^\S\n]*)\n/g, '<br/>');
     let startLen = 0
     const svgContent = layer.text.styleRuns.reduce((acc, item, index) => {
         const endLen = startLen + item.length;
         const fontSize = (item.style.fontSize || layer.text.style.fontSize) * scale;
         const text = textStr.substring(startLen, endLen);
         startLen = endLen;
-        return acc + `<i style="font-size:${fontSize}px;color: ${textUtil.getFill(layer)};">${text}</i>`;
+        return acc + `<span style="font-size:${fontSize}px;color: ${textUtil.getFill(layer)};">${text}</span>`;
     }, '');
 
     const htmlText = new HTMLText({
